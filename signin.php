@@ -9,12 +9,16 @@
 </head>
 <body>
     <div class="container">
+    <div class="close">
+        <a href="index.php" class="noline"><p> ← Return </p></a>
+    </div>
     <section class="login">
     <h1> Sign in! </h1>
     </br><hr></br>
     <form action="signin.php" method="post" enctype="multipart/form-data">
         <label>Username: </br><input type="text" name="username" required></label></br></br>
         <label>Password: </br><input type="password" name="password" required></label></br></br>
+        <a href="signup.php"><p class="hint"> Don't have an account? Sign up!</p></a></br>
         <input type="submit" class="submit" value="Sign in!"/>
     </form>
     </section>

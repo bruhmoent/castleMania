@@ -1,4 +1,5 @@
-*{
+*
+{
     margin: 0;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -9,7 +10,8 @@ h1
     font-size: 45px;
 }
 
-html {
+html 
+{
     background-image: linear-gradient(to left, rgba(167, 35, 194, 0.8), transparent), url("https://rare-gallery.com/mocahbig/90883-castle-minimalism-minimalist-artist-artwork-digital.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,57 +20,64 @@ html {
     background-attachment: fixed;
   }
 
-  .container {
-    display: flex;
-  }
+.container 
+{
+  display: flex;
+}
   
-  .welcomeCard,
-  .login {
-    flex: 1;
-    padding: 5rem;
-    margin: 10rem;
-    border-radius: 25px;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0px 0px 20px rgba(183, 36, 202, 0.6);
-  }
+.welcomeCard,
+.login 
+{
+  flex: 1;
+  padding: 5rem;
+  margin: 10rem;
+  border-radius: 25px;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(183, 36, 202, 0.6);
+}
   
 .opaque
 {
     opacity: 0.7;
 }
 
-  .attention
-  {
-    color: purple;
-  }
+.attention
+{
+  color: purple;
+}
 
-  .welcomeCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: rgba(247, 243, 252, 0.8);
-    font-size: large;
-    color: rgb(0, 0, 0);
-    background-image: linear-gradient(to bottom, rgba(126, 60, 202, 0.3) 0%, rgba(126, 60, 202, 0.8) 100%);
-  }
+.welcomeCard 
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(247, 243, 252, 0.8);
+  font-size: large;
+  color: rgb(0, 0, 0);
+  background-image: linear-gradient(to bottom, rgba(126, 60, 202, 0.3) 0%, rgba(126, 60, 202, 0.8) 100%);
+}
   
-  .login {
-    background-color: rgba(131, 76, 182, 0.8);
-    color: white;
-    filter: grayscale(100%) brightness(50%) contrast(150%);
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
-  }
+.login 
+{
+  background-color: rgba(131, 76, 182, 0.8);
+  color: white;
+  filter: grayscale(100%) brightness(50%) contrast(150%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
 
-.login p {
+.login p 
+{
     font-size: 1.2rem;
 }
   
-.pfp {
+.pfp 
+{
     margin-top: 10px;
 }
 
-.login input {
+.login input 
+{
     font-size: 1.2rem;
     opacity: 0.8;
     border-radius: 6.5px;
@@ -84,7 +93,8 @@ html {
     border: 1px groove rgb(12, 41, 32);
 }
 
-.message {
+.message 
+{
     position: fixed;
     bottom: 0;
     left: 0;
@@ -94,6 +104,34 @@ html {
     text-align: center;
   }
   
+.hint
+{
+  color: white;
+  text-decoration: underline;
+  opacity: 0.6;
+}
+
+.noline
+{
+  text-decoration: none;
+}
+
+.close
+{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: white;
+  border-radius: 25px;
+  height: 5%;
+  width: 5%;
+  opacity: 0.7;
+}
+
 .error
 {
     background-color: rgb(216, 9, 9);
@@ -117,24 +155,4 @@ html {
 input
 {
     opacity: 0.9;
-}
-
-.bar
-{
-
-}
-
-.sidebar
-{
-
-}
-
-.content
-{
-
-}
-
-.footer
-{
-
 }

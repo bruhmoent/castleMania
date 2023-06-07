@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="style.scss">
 </head>
 <body>
+
     <div class="container">
+    <div class="close">
+        <a href="index.php" class="noline"><p> ← Return </p></a>
+    </div>
     <section class="login">
     <h1> Sign up! </h1>
     </br><hr></br>
@@ -60,7 +64,9 @@
             $addUserQuery->bindParam(':login', $username);
             $addUserQuery->bindParam(':password', $hashedPassword);
             $addUserQuery->bindParam(':email', $email);
-            $addUserQuery->bindParam(':profilePicture', $profilePicture, PDO::PARAM_LOB);
+            $pictureData = file_get_contents($profilePicture);
+            $addUserQuery->bindParam(':profilePicture', $pictureData, PDO::PARAM_LOB);
+            $addUserQuery->execute();
 
             if ($addUserQuery->execute()) {
                 echo '<p class="success">User added successfully.</p>';
