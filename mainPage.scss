@@ -70,9 +70,9 @@ html::before
 .profileContainer {
     display: flex;
     flex-direction: column;
-    width: 25%;
     justify-content: center;
     text-align: center;
+    width: 25%;
     margin: 5rem;
     padding: 5rem;
     background-color: rgb(47, 45, 49);
@@ -83,6 +83,53 @@ html::before
     background-position: center; 
     background-blend-mode: lighten; 
     background-attachment: fixed; 
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.postContainer {
+    width: 25%;
+    padding: 5rem;
+    background-color: rgb(47, 45, 49);
+    border-radius: 6.5px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    max-height: 400px; 
+}
+
+.postList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-container {
+    background-color: rgba(20, 20, 20, 0.7);
+    border-radius: 6.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-align: center;
+}
+
+.post
+{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    height: 50%;
+    width: 25%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6.5px;
 }
 
 .index-lower
@@ -142,6 +189,80 @@ html::before
     text-align: left;
     align-items: left;
     box-shadow: 0 0 10px 5px rgba(86, 20, 173, 0.2);
+}
+
+.description-container
+{
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 6.5px;
+}
+
+.description
+{
+    color:rgb(214, 214, 214);
+}
+
+.plus-button
+{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 48px;
+    border-radius: 25px;
+    background-color: green;
+    color: white;
+    width: 100%;
+    height: 100%;
+    border: 2px groove rgba(255,255,255,0.5);
+}
+
+.button-container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+input
+{
+    border-radius: 6.5px;
+}
+
+.delete-button
+{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-size: 28px;
+    border-radius: 25px;
+    background-color: rgb(128, 15, 0);
+    color: white;
+    width: 50%;
+    height: 50%;
+    border: 2px groove rgba(255,255,255,0.5);
+}
+
+.delete-button a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.delete-button:hover
+{
+    background-color: rgb(177, 26, 6);
+}
+
+.plus-button:hover
+{
+    background-color: rgb(6, 177, 43);
+}
+
+.button-container a {
+    color: white;
+    text-decoration: none;
 }
 
 .footer

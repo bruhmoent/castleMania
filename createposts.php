@@ -83,7 +83,7 @@
     <div class="welcomeCard">
         <h1><i> Share your experience! </i></h1>
         </br>
-        <p> Browse or post <b class="attention">beatiful</b> castles, </p>
+        <p> Browse or post <b class="attention">beatiful</b> castles! </p>
         </br>
         <ul class="opaque">
             <p><b class="attention">Free</b> and easy sharing,</p>

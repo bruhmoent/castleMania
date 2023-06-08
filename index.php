@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mainPage.scss">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <title>CastleMania - Main</title>
 </head>
 <body>
@@ -47,7 +49,7 @@
         die("Database connection error.");
     }
 
-    $query = "SELECT p.*, u.login AS username FROM posts p INNER JOIN users u ON p.userId = u.id ORDER BY RANDOM() LIMIT 4";
+    $query = "SELECT p.*, u.login AS username FROM posts p INNER JOIN users u ON p.userId = u.id ORDER BY RANDOM() LIMIT 3";
     $getPost = $db->prepare($query);
     $getPost->execute();
 
@@ -60,6 +62,7 @@
             $title = $post['title'];
             $username = $post['username'];
             $attitude = $post['attitude'];
+            $starRating = $post['starRating'];
 
             echo '<section class="profileContainer post-' . $counter . '">';
             echo '<style>';
@@ -85,7 +88,25 @@
             echo '</style>';
 
             echo '<h1 class="attention">' . $title . '</h1><hr>';
-            echo '</br><label style="font-size:24px">Description: </label><p>' . $description . '</p>';
+
+            $maxCharactersPerChunk = 30;
+            $chunks = str_split($description, $maxCharactersPerChunk);
+            echo '</br><label style="font-size:24px">Description: </label>';
+            echo '<div class="description-container">';
+            foreach ($chunks as $chunk) {
+                echo '<p class="description">' . $chunk . '</p>';
+            }
+            echo '</div>';
+            echo '<div class="rating">';
+            echo '<input type="hidden" name="rating" id="rating-value" value="">';
+            
+            for ($i = 1; $i <= $starRating; $i++) {
+                echo '<span class="star" data-value="' . $i . '">';
+                echo '<i class="fas fa-star';
+                echo '"></i></span>';
+            }
+            
+            echo '</div>';
             echo '<p> Attitude: ' . $attitude . '</p>';
             echo '<a class="index-lower" href="profile.php?username='.$username.'">'.'<p> Author: ' . $username . '</p></a>';
             echo '</section>';
