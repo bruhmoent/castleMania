@@ -39,7 +39,7 @@
                     die("Database connection error.");
                 }
 
-                $getUserQuery = $db->prepare('SELECT password FROM users WHERE login = :login');
+                $getUserQuery = $db->prepare('SELECT password,id FROM users WHERE login = :login');
                 $getUserQuery->bindParam(':login', $username);
                 $getUserQuery->execute();
                 $userData = $getUserQuery->fetch();
@@ -47,6 +47,7 @@
                 if ($userData && password_verify($password, $userData['password'])) {
                     echo '<p class="success">User successfully logged in!</p>';
                     setcookie("username", $username, time() + 3600 * 365, "/");
+                    setcookie("user_id", $userData['id'], time() + 3600 * 365, "/");
                     header('Location: index.php');
                 } else {
                     echo '<p class="error">Incorrect details.</p>';

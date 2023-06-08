@@ -10,11 +10,13 @@ h1
     font-size: 45px;
 }
 
-html {
+html 
+{
     position: relative;
-  }
-  
-html::before {
+}
+
+html::before 
+{
   content: "";
   position: fixed;
   top: 0;
@@ -68,12 +70,31 @@ html::before {
 .profileContainer {
     display: flex;
     flex-direction: column;
+    width: 25%;
     justify-content: center;
     text-align: center;
     margin: 5rem;
     padding: 5rem;
     background-color: rgb(47, 45, 49);
     border-radius: 6.5px;
+    background-image: url("");
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+    background-blend-mode: lighten; 
+    background-attachment: fixed; 
+}
+
+.index-lower
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
 }
 
 .profileContainer > * {
@@ -109,7 +130,7 @@ html::before {
 .content
 {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     width: calc(100% - 6rem);
     color: white;

@@ -40,7 +40,65 @@
     }
     ?>
     </section>
-    <section class="content"></section>
+    <section class="content">
+    <?php
+    require_once 'database.php';
+    if (!$db) {
+        die("Database connection error.");
+    }
+
+    $query = "SELECT p.*, u.login AS username FROM posts p INNER JOIN users u ON p.userId = u.id ORDER BY RANDOM() LIMIT 4";
+    $getPost = $db->prepare($query);
+    $getPost->execute();
+
+    if ($getPost->rowCount() >= 0) {
+        $counter = 1;
+
+        while ($post = $getPost->fetch(PDO::FETCH_ASSOC)) {
+            $description = $post['opinion'];
+            $castle_photo = $post['attachment'];
+            $title = $post['title'];
+            $username = $post['username'];
+            $attitude = $post['attitude'];
+
+            echo '<section class="profileContainer post-' . $counter . '">';
+            echo '<style>';
+            echo '.post-' . $counter . ' {';
+            echo '  position: relative;';
+            echo '  z-index: 1;';
+            echo '}';
+            echo '.post-' . $counter . '::before {';
+            echo '  content: "";';
+            echo '  position: absolute;';
+            echo '  top: 0;';
+            echo '  left: 0;';
+            echo '  right: 0;';
+            echo '  bottom: 0;';
+            echo '  z-index: -1;';
+            echo '  background-repeat: no-repeat;';
+            echo '  background-size: cover;';
+            echo '  background-position: center;';
+            echo '  background-blend-mode: lighten;';
+            echo '  filter: brightness(0.6) blur(5px);';
+            echo '  background-image: url(data:image/png;base64,' . base64_encode($castle_photo) . ');';
+            echo '}';
+            echo '</style>';
+
+            echo '<h1 class="attention">' . $title . '</h1><hr>';
+            echo '</br><label style="font-size:24px">Description: </label><p>' . $description . '</p>';
+            echo '<p> Attitude: ' . $attitude . '</p>';
+            echo '<a class="index-lower" href="profile.php?username='.$username.'">'.'<p> Author: ' . $username . '</p></a>';
+            echo '</section>';
+
+            $counter++;
+        }
+    } else {
+        echo '<section class="content">';
+        echo "Post not found";
+        echo '</section>';
+    }
+    ?>
+    </section>
     <section class="footer"></section>
 </body>
 </html>

@@ -25,4 +25,17 @@ $query = "CREATE TABLE IF NOT EXISTS users (
     profilePicture BLOB
 )";
 $db->exec($query);
+
+$query = "CREATE TABLE IF NOT EXISTS posts (
+    id INTEGER PRIMARY KEY,
+    userId INTEGER,
+    opinion TEXT,
+    title VARCHAR(40),
+    starRating INTEGER,
+    attachment BLOB,
+    attitude DECIMAL(9,6),
+    FOREIGN KEY (userId) REFERENCES users(id)
+)";
+$db->exec($query);
+
 ?>
