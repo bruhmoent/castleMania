@@ -10,7 +10,9 @@
 <body>
     <div class="container">
     <div class="close">
-        <a href="index.php" class="noline"><p> ← Return </p></a>
+        <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="noline"><p> ← Return</p></a>
+        <p style="color: rgba(0,0,0,0);"> <|> </p>
+        <a href="index.php" class="noline"><p> ⌂ Home </p></a>
     </div>
     <section class="login">
     <h1> Sign in! </h1>

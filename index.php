@@ -63,6 +63,7 @@
             $username = $post['username'];
             $attitude = $post['attitude'];
             $starRating = $post['starRating'];
+            $postID = $post['id'];
 
             echo '<section class="profileContainer post-' . $counter . '">';
             echo '<style>';
@@ -82,7 +83,7 @@
             echo '  background-size: cover;';
             echo '  background-position: center;';
             echo '  background-blend-mode: lighten;';
-            echo '  filter: brightness(0.6) blur(5px);';
+            echo '  filter: brightness(0.5) blur(5px);';
             echo '  background-image: url(data:image/png;base64,' . base64_encode($castle_photo) . ');';
             echo '}';
             echo '</style>';
@@ -109,6 +110,7 @@
             echo '</div>';
             echo '<p> Attitude: ' . $attitude . '</p>';
             echo '<a class="index-lower" href="profile.php?username='.$username.'">'.'<p> Author: ' . $username . '</p></a>';
+            echo '<a class="index-inside" href="viewposts.php?username='.$username.'&postID='.$postID.'">'.'<p> → </p></a>';
             echo '</section>';
 
             $counter++;

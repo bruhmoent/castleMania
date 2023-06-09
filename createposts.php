@@ -14,7 +14,9 @@
 
     <div class="container">
     <div class="close">
-        <a href="index.php" class="noline"><p> ← Return </p></a>
+        <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="noline"><p> ← Return</p></a>
+        <p style="color: rgba(0,0,0,0);"> <|> </p>
+        <a href="index.php" class="noline"><p> ⌂ Home </p></a>
     </div>
     <section class="login">
     <h1> Create a post! </h1>
@@ -91,43 +93,63 @@
         </ul>
     </div>
 </div>
-    <?php
-    require_once 'database.php';
-    if(isset($_COOKIE["user_id"])){
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $postname = filter_input(INPUT_POST, 'postname');
-            $description = filter_input(INPUT_POST, 'description');
+<?php
+require_once 'database.php';
+
+if (isset($_COOKIE["user_id"])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $postname = filter_input(INPUT_POST, 'postname');
+        $description = filter_input(INPUT_POST, 'description');
+
+        if ($_FILES['castle_photo']['error'] === UPLOAD_ERR_OK) {
             $castle_photo = $_FILES['castle_photo']['tmp_name'];
-            $attitudeValue = $_POST["attitude"];
-        
-            if (isset($postname) && isset($description)) {
-                if (!$db) {
-                    die("Database connection error.");
-                }
-                $addPost = $db->prepare('INSERT INTO posts (userId, opinion, title, starRating, attachment, attitude) VALUES (:userId, :opinion, :title, :starRating, :attachment, :attitude)');
-                $addPost->bindParam(':userId', $_COOKIE["user_id"]);
-                $addPost->bindParam(':opinion', $description);
-                $addPost->bindParam(':title', $postname);
-                $addPost->bindParam(':starRating', $_POST['rating']);
-                $pictureData = file_get_contents($castle_photo);
-                $addPost->bindParam(':attachment', $pictureData, PDO::PARAM_LOB);
-                $addPost->bindParam(':attitude', $attitudeValue);
-                $addPost->execute();
-        
-                if ($addPost->rowCount() > 0) {
-                    echo '<p class="success">Post created successfully!</p>';
-                    header('Location: index.php');
-                    exit();
+
+            $maxFileSize = 4 * 1024 * 1024;
+            if ($_FILES['castle_photo']['size'] <= $maxFileSize) {
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                $fileType = $_FILES['castle_photo']['type'];
+                if (in_array($fileType, $allowedTypes)) {
+                    $attitudeValue = $_POST["attitude"];
+
+                    if (isset($postname) && isset($description)) {
+                        if (!$db) {
+                            die("Database connection error.");
+                        }
+                        $addPost = $db->prepare('INSERT INTO posts (userId, opinion, title, starRating, attachment, attitude) VALUES (:userId, :opinion, :title, :starRating, :attachment, :attitude)');
+                        $addPost->bindParam(':userId', $_COOKIE["user_id"]);
+                        $addPost->bindParam(':opinion', $description);
+                        $addPost->bindParam(':title', $postname);
+                        $addPost->bindParam(':starRating', $_POST['rating']);
+                        $pictureData = file_get_contents($castle_photo);
+                        $addPost->bindParam(':attachment', $pictureData, PDO::PARAM_LOB);
+                        $addPost->bindParam(':attitude', $attitudeValue);
+                        $addPost->execute();
+
+                        if ($addPost->rowCount() > 0) {
+                            echo '<p class="success">Post created successfully!</p>';
+                            exit();
+                        } else {
+                            echo 'Error creating post.';
+                        }
+                    }
                 } else {
-                    echo 'Error creating post.';
+                    echo '<p class="error">Error: Invalid file type. Only JPEG, PNG, and GIF images are allowed.</p>';
                 }
+            } else {
+                echo '<p class="error">Error: File size exceeds the limit of 4MB.</p>';
             }
+        } else {
+            echo '<p class="error">Error: File upload failed. Please try again.</p>';
         }
-}else{
-    echo '<p class="error">Access denied. User not logged in.</p>';
+    } else {
+        echo '<p class="warning">Waiting for data...</p>';
+    }
+} else {
+    echo '<p class="warning">Waiting for data...</p>';
 }
 
-    $db = null;
-    ?>
+$db = null;
+?>
+
 </body>
 </html>

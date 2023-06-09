@@ -37,7 +37,8 @@
     echo '<section class="section"><p class="headerShadow"><a href="signup.php">Sign Up</a></p></section>';
     }
     ?>
-
+    </section>
+    <section class="section-container"> 
     <?php
     require_once 'database.php';
     if (isset($_GET['username']) && !empty($_GET['username'])) {
@@ -57,10 +58,33 @@
             $pfp = $user['profilePicture'];
             $userCheck = $user['login'];
             echo '<section class="content">';
+
+            echo '<style>';
+            echo '.content {';
+            echo '  position: relative;';
+            echo '  z-index: 1;';
+            echo '}';
+            echo '.content::before {';
+            echo '  content: "";';
+            echo '  position: absolute;';
+            echo '  top: 0;';
+            echo '  left: 0;';
+            echo '  right: 0;';
+            echo '  bottom: 0;';
+            echo '  z-index: -1;';
+            echo '  background-repeat: no-repeat;';
+            echo '  background-size: cover;';
+            echo '  background-position: center;';
+            echo '  background-blend-mode: lighten;';
+            echo '  filter: brightness(0.7) blur(5px);';
+            echo '  background-image: url(data:image/png;base64,' . base64_encode($pfp) . ');';
+            echo '}';
+            echo '</style>';
+
             echo '<section class="profileContainer">';
             echo '<h1 class="attention"> Profile </h1><hr>';
             if (!empty($pfp)) {
-                echo '<img src="data:image/png;base64,' . base64_encode($pfp) . '" alt="Profile Picture"'.' width=64 style="margin: 0 auto;">';
+                echo '<img src="data:image/png;base64,' . base64_encode($pfp) . '" alt="Profile Picture"'.' width=64 height=64 style="margin: 0 auto; border-radius:25px; border: 1px groove white;">';
             } else {
                 echo "No profile picture available.";
             }
@@ -82,11 +106,11 @@
             echo '</section>';
             echo '<div class="postContainer">';
             echo '<div class="postList">';
-            echo '<h1>Posts:</h1>';
+            echo '<h1>Posts:</h1></br>';
 
             while ($post = $postsStatement->fetch(PDO::FETCH_ASSOC)) {
                 echo '<div class="post">';
-                echo '<h3>' . $post['title'] . '</h3>';
+                echo '<a class="index-inside" href="viewposts.php?username='.$username.'&postID='.$post['id'] .'">'.'<h3>' . $post['title'] . '</h3></a>';
                 echo '</div>';
             }
 
@@ -95,8 +119,8 @@
             if(isset($_COOKIE["username"]) && $_COOKIE["username"] === $userCheck){
             echo '<section class="form-container">';
             echo '<form method="POST">';
-            echo '<label for="delete_title">Title of Post to Delete:</label>';
-            echo '<input type="text" name="delete_title" id="delete_title" required>';
+            echo '<label for="delete_title" style="font-size:28px;">Title of Post to Delete:</label><br><br>';
+            echo '<input type="text" style="font-size:28px;" name="delete_title" id="delete_title" required>';
             echo '<button class="delete-button" type="submit">🗑</button>';
             echo '</form>';
             echo '</section>';

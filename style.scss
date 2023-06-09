@@ -160,6 +160,16 @@ html
     border: 1px groove rgb(12, 41, 32);
 }
 
+.warning
+{
+    background-color: rgb(216, 161, 9);
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border: 1px groove rgb(12, 41, 32);
+}
+
 .success
 {
     background-color: rgb(50, 216, 125);
