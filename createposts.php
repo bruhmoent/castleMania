@@ -22,7 +22,7 @@
     <h1> Create a post! </h1>
     </br><hr></br>
     <form action="createposts.php" method="post" enctype="multipart/form-data">
-        <label>Post Title: <br><input type="text" name="postname" required></label><br><br>
+        <label>Post Title: <br><input type="text" name="postname" required maxlength="30"></label><br><br>
         <label>Description: <br><textarea name="description" required maxlength="90"></textarea></label><br><br>
         <label>Rating:</label><br>
         <div class="rating">
